@@ -31,8 +31,8 @@
     p.getHeader().then(h => {
         const map = new maplibregl.Map({
             container: 'map',
-            zoom: h.maxZoom - 2,
-            center: [h.centerLon, h.centerLat],
+            zoom: 16,
+            center: [149.552983, -33.418245], //-33.418245,149.552983
             style: {
                 version: 8,
                 sources: {
@@ -53,9 +53,9 @@
                         }
                     },
                     {
-                        'id': 'roads',
+                        'id': 'fairway_centreline',
                         'source': 'example_source',
-                        'source-layer': 'roads',
+                        'source-layer': 'fairway_centreline',
                         'type': 'line',
                         'paint': {
                             'line-color': 'black'
