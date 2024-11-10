@@ -21,7 +21,7 @@
     const protocol = new pmtiles.Protocol();
     maplibregl.addProtocol('pmtiles', protocol.tile);
 
-    const PMTILES_URL = 'https://github.com/Drewfore/pmtiles_example/pmdata.pmtiles';
+    const PMTILES_URL = 'https://drewfore.github.io/pmtiles_example/pmdata.pmtiles';
     const p = new pmtiles.PMTiles(PMTILES_URL);
 
     // this is so we share one instance across the JS code and the map renderer
