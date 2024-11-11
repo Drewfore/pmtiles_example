@@ -36,17 +36,7 @@
 					url: `pmtiles://${PMTILES_URL}`,
 					attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
         });
-        map.addLayers({[
-                    {
-                        'id': 'lot',
-                        'source': 'example_source',
-                        'source-layer': 'lot',
-                        'type': 'fill',
-                        'paint': {
-                            'fill-color': 'steelblue'
-                        }
-                    },
-                    {
+        map.addLayer({
                         'id': 'fairway_centreline',
                         'source': 'example_source',
                         'source-layer': 'fairway_centreline',
@@ -54,17 +44,6 @@
                         'paint': {
                             'line-color': 'black'
                         }
-                    },
-                    {
-                        'id': 'mask',
-                        'source': 'example_source',
-                        'source-layer': 'mask',
-                        'type': 'fill',
-                        'paint': {
-                            'fill-color': 'white'
-                        }
-                    }
-                ]
 			});
     });
 </script>
