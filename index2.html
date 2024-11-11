@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Add a vector tile source</title>
+    <meta property="og:description" content="Add a vector source to a map." />
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' />
+    <script src='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'></script>
+    <style>
+        body { margin: 0; padding: 0; }
+        html, body, #map { height: 100%; }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+    // add the PMTiles plugin to the maplibregl global.
+    const protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol('pmtiles', protocol.tile);
+
+    const PMTILES_URL = 'https://drewfore.github.io/pmtiles_example/pmdata.pmtiles';
+    const p = new pmtiles.PMTiles(PMTILES_URL);
+	
+    const map = new maplibregl.Map({
+        container: 'map',
+        style:
+            'https://api.maptiler.com/maps/streets/style.json?key=get_your_own_OpIi9ZULNHzrESv6T2vL',
+			zoom: 16,
+            center: [149.552983, -33.418245], //-33.418245,149.552983
+    });
+
+    map.on('load', () => {
+        map.addSource('example_source', {
+					type: 'vector',
+					url: `pmtiles://${PMTILES_URL}`,
+					attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
+        });
+        map.addLayer({[
+                    {
+                        'id': 'lot',
+                        'source': 'example_source',
+                        'source-layer': 'lot',
+                        'type': 'fill',
+                        'paint': {
+                            'fill-color': 'steelblue'
+                        }
+                    },
+                    {
+                        'id': 'fairway_centreline',
+                        'source': 'example_source',
+                        'source-layer': 'fairway_centreline',
+                        'type': 'line',
+                        'paint': {
+                            'line-color': 'black'
+                        }
+                    },
+                    {
+                        'id': 'mask',
+                        'source': 'example_source',
+                        'source-layer': 'mask',
+                        'type': 'fill',
+                        'paint': {
+                            'fill-color': 'white'
+                        }
+                    }
+                ]
+			});
+    });
+</script>
+</body>
+</html>
