@@ -29,6 +29,7 @@
             'https://api.maptiler.com/maps/streets/style.json?key=HUrrABhUC3vy2fx6YAAb',
 			zoom: 16,
             center: [149.552983, -33.418245], //-33.418245,149.552983
+        fadeDuration:1000,
     });
 
     map.on('load', () => {
@@ -52,7 +53,16 @@
                         'source-layer': 'fairway',
                         'type': 'fill',
                         'paint': {
-                            'fill-color': 'black'
+                            'fill-color': '#b9d5a2'
+                        }
+        });
+        map.addLayer({
+                        'id': 'green',
+                        'source': 'example_source',
+                        'source-layer': 'green',
+                        'type': 'fill',
+                        'paint': {
+                            'fill-color': '#b6d89a'
                         }
         });
         map.addLayer({
