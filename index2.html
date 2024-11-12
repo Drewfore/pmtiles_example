@@ -20,7 +20,7 @@
     const protocol = new pmtiles.Protocol();
     maplibregl.addProtocol('pmtiles', protocol.tile);
 
-    const PMTILES_URL = 'https://drewfore.github.io/pmtiles_example/pmdata.pmtiles';
+    const PMTILES_URL = 'https://drewfore.github.io/pmtiles_example/bgc.pmtiles';
     const p = new pmtiles.PMTiles(PMTILES_URL);
 	
     const map = new maplibregl.Map({
@@ -47,6 +47,15 @@
                         }
         });        
         map.addLayer({
+                        'id': 'fairway',
+                        'source': 'example_source',
+                        'source-layer': 'fairway',
+                        'type': 'fill',
+                        'paint': {
+                            'fill-color': 'black'
+                        }
+        });
+        map.addLayer({
                         'id': 'fairway_centreline',
                         'source': 'example_source',
                         'source-layer': 'fairway_centreline',
@@ -59,3 +68,9 @@
 </script>
 </body>
 </html>
+
+# Convert shapefile to to pmtiles
+ogr2ogr -dsco MINZOOM=10 -dsco MAXZOOM=18 -f "PMTiles" filename.pmtiles data.gpkg
+
+# Merge all PostgreSQL/PostGIS tables in a schema into a single PMTiles file.
+ogr2ogr -dsco MINZOOM=0 -dsco MAXZOOM=15 -f "PMTiles" filename.pmtiles "PG:host=my_host port=my_port dbname=my_database user=my_user password=my_password schemas=my_schema"
