@@ -38,6 +38,15 @@
 					attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
         });
         map.addLayer({
+                       'id': 'lot',
+                        'source': 'example_source',
+                        'source-layer': 'lot',
+                        'type': 'fill',
+                        'paint': {
+                            'fill-color': '#e1e3ac' //a6b985
+                        }
+        });        
+        map.addLayer({
                         'id': 'fairway_centreline',
                         'source': 'example_source',
                         'source-layer': 'fairway_centreline',
@@ -45,7 +54,7 @@
                         'paint': {
                             'line-color': 'black'
                         }
-			});
+        });
     });
 </script>
 </body>
